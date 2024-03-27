@@ -16,7 +16,7 @@ tcp_address=127.0.0.1
 echo "Modbus stand test"
 echo "-m (rtu|tcp) -p <uart_port> -P <tcp_address> -v (verbose) -u (infinity circle)"
 echo "default params: -m mtu -p /dev/ttyS3 -P 127.0.0.1"
-echo "default opions: noverbose,one cycle"
+echo "default options: noverbose, one cycle"
 
 
 while getopts ":u:D:m:P::p:v:" opt; do

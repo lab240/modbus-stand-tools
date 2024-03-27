@@ -1,5 +1,31 @@
 # Утилиты для работы с стендом Modbus
 
+## Скрипт проверки датчиков стенда
+
+>modbus-stand-tests/modbustest5.sh
+
+Проверяет отклик всех датчиков по Modbus RTU
+
+Можно отредактирвоать переменные запускаскрипта
+
+```
+verbose=false
+# Задержки для кругов 1 и 2 в сек
+delay1=1
+delay2=0.2
+port="/dev/ttyS3"
+speed=115200
+first_address=1
+registers_to_read=5
+unlimited=false
+sensors_amount=10
+mode=rtu
+tcp_address=127.0.0.1
+```
+
+Также переменные можно переопределить через параметры запуска
+
+
 ## Скрипт генерации конфига telegraf для стенда
 
 >modbus-generate-telegraf-config/telegraf-cfg-generate.sh
