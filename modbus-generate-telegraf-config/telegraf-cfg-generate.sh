@@ -2,10 +2,11 @@
 
 #ip=192.168.16.199
 ip=127.0.0.1
-dev_num=30
+first_dev_num=1
+last_dev_num=30
 timeout="10s"
 
-for i in $(seq 1 $dev_num)
+for i in $(seq $first_dev_num $last_dev_num)
 do
 
 	echo "
