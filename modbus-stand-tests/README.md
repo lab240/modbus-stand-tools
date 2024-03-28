@@ -1,14 +1,11 @@
 # Скрипт проверки датчиков стенда
 
->sh modbustest5.sh
+```sh modbustest5.sh```
 
-:::tip
-
-Скрипт использует утилиту modpoll.
-
-Скачать можно по ссылке: https://www.modbusdriver.com/modpoll.html
-
-:::
+> [!TIP]  
+>Скрипт использует утилиту modpoll.
+>
+>Скачать можно по ссылке: https://www.modbusdriver.com/modpoll.html
 
 Скрипт проверяет отклик всех датчиков стенда по Modbus RTU или Modbus MTU. Протестирован на Linux. 
 
@@ -42,15 +39,12 @@ echo "default options: noverbose, one cycle"
 
 - m: выбор как опрашивать стенд. 
 
-:::tip   
-
-Чтобы опрашивать стенд по Modbus TCP необходимо запустить шлюз mbusd для трансляции запросов в 
-
-Ссылка на mbusd: https://github.com/3cky/mbusd
-
-Как поставить mbusd на Armbian: https://napiworld.ru/software/armbian-tune#%D1%81%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D0%B8%D1%80%D1%83%D0%B5%D0%BC-mbusd
-
-:::
+> [!TIP]   
+>Чтобы опрашивать стенд по Modbus TCP необходимо запустить шлюз mbusd для трансляции запросов из Modbus RTU в Modbus TCP. 
+>
+>Ссылка на mbusd: https://github.com/3cky/mbusd
+>
+>Как поставить mbusd на Armbian: https://napiworld.ru/software/armbian-tune#%D1%81%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D0%B8%D1%80%D1%83%D0%B5%D0%BC-mbusd
 
 - v: выводить больше информации
 
