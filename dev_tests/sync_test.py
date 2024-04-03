@@ -7,8 +7,8 @@ from pymodbus.client import ModbusSerialClient
 
 
 LOOP_COUNT = 500
-REGISTER_COUNT = 4
-ADDRESSES = [1,2]
+REGISTER_COUNT = 1
+ADDRESSES = [2]
 SERIAL_PORT="/dev/ttyUSB0"
 BAUDRATE=115200
 PARITY="E"

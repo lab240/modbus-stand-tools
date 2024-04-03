@@ -19,12 +19,13 @@ from pymodbus import (
     pymodbus_apply_logging_config,
 )
 
-IP="192.168.110.17"
+IP="192.168.16.146"
 PORT=502
-LOOP_COUNT = 100
+LOOP_COUNT_A = 300
 REGISTER_COUNT = 4
-ADDRESSES = [1,2,3,4,5,6,7,8,9,10]
-
+#ADDRESSES = [1,2,3,4,5,6,7,8,9,10]
+ADDRESSES = list(range(1, 31))
+LOOP_COUNT=LOOP_COUNT_A//len(ADDRESSES)
 
 async def run_async_simple_client(comm, host, port):
     """Run async client."""
@@ -51,29 +52,32 @@ async def run_async_simple_client(comm, host, port):
     assert client.connected
 
     start_time = time.time()
+
     for _i in range(LOOP_COUNT):
         for addr in ADDRESSES:
-            rr = await client.read_holding_registers(1, REGISTER_COUNT, slave=addr)
+            rr = await client.read_holding_registers(0, REGISTER_COUNT, slave=addr)
             if rr.isError():
               print(f"Received Modbus library error({rr})")
               break
-            #print(rr2.registers)
+            print(f"{_i}\{LOOP_COUNT+1}: {rr.registers}")
     print("get and verify data")
 
     client.close()
 
     run_time = time.time() - start_time
-    avg_call = (run_time / LOOP_COUNT) / len(ADDRESSES) * 1000
-    avg_register = avg_call / REGISTER_COUNT
+    avg_call = (run_time / LOOP_COUNT) * 1000
+    avg_call_device=avg_call / len(ADDRESSES)
+    avg_register = avg_call_device / REGISTER_COUNT
     print(
-        f"running {LOOP_COUNT} call (each {REGISTER_COUNT} registers), took {run_time:.2f} seconds"
+        f"running {LOOP_COUNT} call (each {len(ADDRESSES)} devs with {REGISTER_COUNT} registers), took {run_time:.2f} seconds"
     )
-    print(f"Averages {avg_call:.2f} ms pr call and {avg_register:.2f} ms pr register.")
+    print(f"Averages all devs:{avg_call:.2f} ms pr call; {avg_call_device:.2f} ms pr device; {avg_register:.2f} ms pr register.")
 
 
 
 
 if __name__ == "__main__":
+    print(f"LOOP_COUNT={LOOP_COUNT}")
     asyncio.run(
         run_async_simple_client("tcp", IP, PORT), debug=False
     )

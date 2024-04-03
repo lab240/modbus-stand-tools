@@ -29,7 +29,7 @@ async def run_async_client_test():
     start_time = time.time()
     for _i in range(LOOP_COUNT):
         for addr in ADDRESSES:
-            rr = await client.read_holding_registers(1, REGISTER_COUNT, slave=addr)
+            rr = await client.read_holding_registers(0, REGISTER_COUNT, slave=addr)
             if rr.isError():
               print(f"Received Modbus library error({rr})")
               break
