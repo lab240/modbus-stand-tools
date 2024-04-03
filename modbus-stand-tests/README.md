@@ -1,6 +1,6 @@
 # Скрипт проверки датчиков стенда
 
-```sh modbustest5.sh```
+```bash modbustest5.sh```
 
 > [!TIP]  
 >Скрипт использует утилиту modpoll.
