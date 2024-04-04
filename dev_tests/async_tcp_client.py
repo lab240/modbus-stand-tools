@@ -59,7 +59,7 @@ async def run_async_simple_client(comm, host, port):
             if rr.isError():
               print(f"Received Modbus library error({rr})")
               break
-            print(f"{_i}\{LOOP_COUNT+1}: {rr.registers}")
+            print(f"{_i+1}\{LOOP_COUNT}: {rr.registers}")
     print("get and verify data")
 
     client.close()
