@@ -7,9 +7,9 @@ from pymodbus.client import ModbusSerialClient
 
 
 LOOP_COUNT = 500
-REGISTER_COUNT = 1
-ADDRESSES = [2]
-SERIAL_PORT="/dev/ttyUSB0"
+REGISTER_COUNT = 10
+ADDRESSES = [1,2]
+SERIAL_PORT="/dev/ttyUSB1"
 BAUDRATE=115200
 PARITY="E"
 
@@ -31,7 +31,7 @@ def run_sync_client_test():
             if rr.isError():
               print(f"Received Modbus library error({rr})")
               break
-            #print(rr.registers)
+            print(rr.registers)
     client.close()
     run_time = time.time() - start_time
     avg_call = (run_time / LOOP_COUNT) /len(ADDRESSES) * 1000
