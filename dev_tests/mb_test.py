@@ -10,16 +10,20 @@ from pymodbus.client import AsyncModbusSerialClient, ModbusSerialClient
 
 VERSION="0.01"
 
-LOOP_COUNT = 1
+LOOP_COUNT = 200
 REGISTER_COUNT = 10
-PAUSE = 40 #pause in ms
+PAUSE = 3 #pause in ms
 ADDRESSES = arr.array('i')
-SERIAL_PORT="/dev/ttyS3"
+SERIAL_PORT="/dev/ttyUSB0"
 BAUDRATE=115200
 PARITY="E"
 
-FIRST_REGISTER=31
-LAST_REGISTER=90
+#FIRST_REGISTER=51
+#LAST_REGISTER=60
+
+FIRST_REGISTER=41
+LAST_REGISTER=50
+ADDR_EXCLUDE=[]
 
 #METHOD="ASYNC"
 METHOD="SYNC"
@@ -36,7 +40,8 @@ errors=0
 
 def fill_array(first_element, last_element):
     for i in range(first_element, last_element+1):
-       ADDRESSES.append(i)
+        if i not in ADDR_EXCLUDE:
+            ADDRESSES.append(i)
 
 def run_sync_client_test():
     global errors
@@ -52,14 +57,17 @@ def run_sync_client_test():
 
     start_time = time.time()
     for _i in range(LOOP_COUNT):
+        print(f"Start sync loop: {_i} of {LOOP_COUNT}");
         for addr in ADDRESSES:
+            print(f"{_i}->{addr}->", end='')
+            #print(f"{addr}->")
             rr = client.read_holding_registers(0, REGISTER_COUNT, slave=addr)
-            time.sleep(PAUSE/1000);
+            time.sleep(PAUSE/1000)
             if rr.isError():
               print(f"Received Modbus library error({rr})")
               errors+=1
             else: 
-                if DEBUG: print(f"{addr}, {rr.registers}")
+              if DEBUG: print(f"{rr.registers}")
     
     client.close()
     run_time = time.time() - start_time
